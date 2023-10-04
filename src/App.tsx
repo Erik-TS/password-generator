@@ -24,7 +24,7 @@ function App() {
       return charList
     }
 
-    password = getCharList(size).toLocaleString()
+    password = getCharList(size).join("")
     return password
   }
 
@@ -33,13 +33,13 @@ function App() {
   return (
     <>
       <h1>Password Generator</h1>
-      <div className={"form"}>
+      <div className={"center-form"}>
         <div className={"row"}>
           <label>Nº of characters</label>
           <input className={"password-size"} type="text" size={2} />
         </div>
         <div className={"row"}>
-          <input type="button" value="Generate" onClick={() => {
+          <input className={"button-layout generate-button"} type="button" value="Generate" onClick={() => {
             let userInput: string = (document.querySelector(".password-size") as HTMLInputElement).value
             let newPassword: string
             const regex = /[^0-9]/
@@ -54,16 +54,17 @@ function App() {
           }} />
         </div>
         <div className={"row"}>
-          <p>{password}</p>
+          <p className={"password-text"}>{password}</p>
         </div>
         <div className={"row"}>
-          <input type="button" value="Copy to clipboard" onClick={() => {
+          <input className={"button-layout clipboard-button"} type="button" value="Copy to clipboard" onClick={() => {
             navigator.clipboard.writeText(password)
               .then(() => {
-                console.log("Password copied!")
+                alert("Password copied to clipboard!")
               })
               .catch(err => {
                 console.error(err)
+                alert("Password not copied!")
               })
           }} />
         </div>
